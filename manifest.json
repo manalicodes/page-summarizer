@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Page Summarizer",
+  "version": "2.0.0",
+  "description": "Summarize the current web page offline, with no API key.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Summarize this page",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+S" },
+      "description": "Open the summarizer"
+    }
+  }
+}

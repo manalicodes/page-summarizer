@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Summarizer test bench</title>
+  <style>
+    body { font: 14px/1.5 system-ui, "Segoe UI", sans-serif; max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    textarea { width: 100%; height: 220px; box-sizing: border-box; font: inherit; }
+    input { width: 100%; padding: 6px; box-sizing: border-box; margin-bottom: 8px; }
+    button { padding: 6px 16px; margin: 8px 0; }
+    pre { background: #f4f4f4; padding: 12px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Summarizer test bench</h1>
+  <p>Paste any article text below and click Run. This tests <code>summarizer.js</code> without loading the extension.</p>
+  <input id="title" placeholder="Page title (optional)" value="How Honeybees Choose a New Home">
+  <textarea id="text">When a honeybee colony grows too large for its hive, roughly half of the workers leave with the old queen to find a new home. This process, called swarming, is one of the most remarkable examples of group decision-making in nature.
+The swarm first settles on a nearby tree branch, forming a dense cluster of thousands of bees. From there, a few hundred experienced scout bees fly out to search the surrounding area for suitable nest sites such as hollow trees or cavities in walls.
+A good nest site must meet several requirements. The cavity should be roughly forty litres in volume, have a small entrance facing south, and sit several metres above the ground to protect the colony from predators.
+When a scout finds a promising site, she returns to the swarm and performs a waggle dance on the surface of the cluster. The direction of the dance points toward the site, and the length of the waggle run indicates its distance.
+Crucially, scouts dance longer and more vigorously for better sites. This means high-quality sites recruit more scouts, who then inspect the site themselves and dance for it if they agree.
+Over time, support builds for the best option while enthusiasm for weaker options fades, because each scout gradually stops dancing for a site after several visits.
+The decision is made when a quorum of about fifteen to twenty scouts gathers at a single site at the same time. Scouts at the chosen site then return to the swarm and produce piping signals that tell the other bees to warm their flight muscles.
+Within an hour, the entire swarm lifts off and flies to the new home, guided by scouts that streak through the cloud of bees toward the chosen site.
+Researchers have found that this process usually picks the best available site, even though no single bee compares all the options. Scientists now study honeybee swarms to design better voting systems and to coordinate groups of robots.
+The bees show that a group can make a smart choice when individuals share information independently and when support for each option builds only as fast as the evidence allows.</textarea>
+  <label>Points: <select id="count"><option>3</option><option selected>6</option><option>10</option></select></label>
+  <button id="run">Run</button>
+  <pre id="out"></pre>
+
+  <script src="../summarizer.js"></script>
+  <script>
+    document.getElementById("run").onclick = () => {
+      const t0 = performance.now();
+      const result = Summarizer.summarize(document.getElementById("text").value, {
+        title: document.getElementById("title").value,
+        count: +document.getElementById("count").value,
+      });
+      result.ms = Math.round(performance.now() - t0);
+      document.getElementById("out").textContent = JSON.stringify(result, null, 2);
+    };
+  </script>
+</body>
+</html>

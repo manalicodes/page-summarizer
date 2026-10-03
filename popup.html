@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Page Summarizer</h1>
+
+  <div class="controls">
+    <select id="length">
+      <option value="short">Short (3 points)</option>
+      <option value="medium" selected>Medium (6 points)</option>
+      <option value="long">Long (10 points)</option>
+    </select>
+    <button id="go">Summarize</button>
+  </div>
+
+  <div id="status"></div>
+  <div id="output"></div>
+
+  <footer>
+    <button id="copy" hidden>Copy</button>
+  </footer>
+
+  <script src="summarizer.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
